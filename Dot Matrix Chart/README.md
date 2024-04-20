@@ -1,2 +1,5 @@
-# PAC 2 Visualització de dades
-Repositori amb visualitzacions de les tècniques assignades a la PAC2.
+# Bibliografia
+https://tableau.toanhoang.com/dot-matrix-tutorial/
+https://datavizcatalogue.com/methods/dot_matrix_chart.html#google_vignette
+https://dataforvisualization.com/charts/dot-matrix-chart/
+https://www.vizwiz.com/2020/12/dot-matrix.html
