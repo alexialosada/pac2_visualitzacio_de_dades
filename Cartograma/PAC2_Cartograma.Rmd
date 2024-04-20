@@ -1,0 +1,62 @@
+---
+title: "Cartograma"
+author: "Alèxia Losada i Fors"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+install.packages("tidyverse")
+install.packages("sf")
+install.packages("rnaturalearth")
+install.packages("rnaturalearthdata")
+install.packages("cartogram")
+install.packages("mapSpain", dependencies = TRUE)
+
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(cartogram)
+library(mapSpain)
+library(readxl)
+
+```
+
+
+
+
+```{r echo=FALSE, message=TRUE, warning=FALSE}
+esp_map <- esp_get_ccaa() %>% st_transform(crs = 25830)
+pobreza_data <- read_excel('9963.xls', sheet='Hoja1')
+esp_map_data <- merge(esp_map, pobreza_data, by.x = "ine.ccaa.name", by.y = "Region")
+
+cont_cartogram <- cartogram_cont(esp_map_data, weight = "IndicePobreza")
+
+# Crear el cartograma amb distorsió
+ggplot(data = cont_cartogram) +
+  geom_sf(aes(fill = IndicePobreza), colour = "white", size = 1) +
+  scale_fill_gradient(low = "cadetblue1", high = "deeppink3", name = "Taxa de\nPobresa (%)") +
+  labs(title = "Taxa de Risc de Pobresa per Comunitat Autònoma",
+       subtitle = "Espanya 2023", 
+       caption = "Árees distorsionades segons la taxa de pobresa") +
+  theme_minimal() +
+  theme(legend.position = "right")
+```
+
+
+Font de dades: https://www.ine.es/
+
+Dataset: https://www.ine.es/jaxiT3/Tabla.htm?t=9963
+
+
+##### Bibliografia
+
+https://github.com/rOpenSpain/mapSpain
+
+https://r-charts.com/es/espacial/cartograma-ggplot2/
+
+https://cran.r-project.org/web/packages/cartogram/cartogram.pdf
+
+https://www.unigis.es/crear-cartogramas-qgis/
+

@@ -1,0 +1,67 @@
+---
+title: "Contour Plot"
+author: "Alèxia Losada i Fors"
+output: html_document
+---
+
+```{r include=FALSE}
+if (!require(akima)) install.packages("akima", dependencies=TRUE)
+if (!require(ggplot2)) install.packages("ggplot2", dependencies=TRUE)
+if (!require(dplyr)) install.packages("dplyr", dependencies=TRUE)
+if (!require(plotly)) {
+  install.packages("plotly", dependencies = TRUE)
+  library(plotly)
+}
+
+# Load necessary libraries
+library(akima)
+library(ggplot2)
+library(dplyr)
+
+```
+
+```{r echo=FALSE}
+#Lectura de les dades
+temperature_underwater <- read.csv('underwater_temperature.csv', sep=';')
+
+#Preparació de les dades, calculem la mitjana de temperatura per longitud i latitud
+temperature_underwater <- temperature_underwater %>%
+  group_by(Latitude, Longitude) %>%
+  summarise(Temp = mean(Temp), .groups = "drop")
+temperature_underwater <- na.omit(temperature_underwater)
+```
+
+#### Distribució de la Temperatura Submarina
+
+```{r echo=FALSE}
+# Utilitzem plot_ly per crear un Contorn Plot
+plot_ly(
+  x = temperature_underwater$Latitude,  # Dades de latitud
+  y = temperature_underwater$Longitude, # Dades de longitud
+  z = temperature_underwater$Temp,      # Dades de temperatura per als contorns
+  type = "contour",                     # Definició de tipus de gràfica de contorn
+  colorscale = 'Viridis',               # Definim escala de colors
+  colorbar = list(title = "Temp (°C)"), # Titol per a la llegenda
+ contours = list(showlabels = TRUE)     # Activem les etiquetes de dades
+) %>% layout(  
+  xaxis = list(title = "Latitud"),                 # Titol del eix X
+  yaxis = list(title = "Longitud")                 # Titol del eix Y
+)
+
+```
+
+Font de dades: <https://www.kaggle.com/>
+
+Dataset: <https://www.kaggle.com/datasets/shivamb/underwater-surface-temperature-dataset?select=underwater_temperature.csv>
+
+##### Bibliografia
+
+<https://statisticsbyjim.com/graphs/contour-plots/>
+
+<https://r-charts.com/correlation/contour-plot/>
+
+<https://alexmiller.phd/posts/contour-plots-in-python-matplotlib-x-y-z/>
+
+<https://plotly.com/r/contour-plots/>
+
+<https://www.statisticshowto.com/contour-plots/>
