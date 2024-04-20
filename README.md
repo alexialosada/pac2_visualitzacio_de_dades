@@ -1,2 +1,7 @@
 # PAC 2 Visualització de dades
-Repositori amb visualitzacions de les tècniques assignades a la PAC2.
+
+Cartograma: https://rawcdn.githack.com/alexialosada/pac2_visualitzacio_de_dades/a7d96efd72515d7f7f58efcdf551e5e187f239c5/Cartograma/PAC2_Cartograma.html
+
+Contour Plot: https://rawcdn.githack.com/alexialosada/pac2_visualitzacio_de_dades/a7d96efd72515d7f7f58efcdf551e5e187f239c5/Contour%20Plot/PAC2_ContourPlot.html
+
+Dot Matrix Chart: https://rawcdn.githack.com/alexialosada/pac2_visualitzacio_de_dades/a7d96efd72515d7f7f58efcdf551e5e187f239c5/Dot%20Matrix%20Chart/PAC2_DotMatrixChart.html
